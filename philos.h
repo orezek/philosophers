@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/28 19:41:21 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/28 23:50:42 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@
 # include <pthread.h>
 
 typedef struct s_philosopher t_philosopher;
-typedef struct s_resource t_shared_resources;
+typedef struct s_shared_resources t_shared_resources;
 typedef struct s_simulation t_simulation;
+
+typedef  enum
+{
+	TAKEN = 0,
+	AVAILABLE = 1
+} Status;
 
 // thread struct aka philosopher
 struct s_philosopher
@@ -35,15 +41,18 @@ struct s_philosopher
 };
 
 // resource struct to hold shared resources for the simulation
-struct s_resource
+struct s_shared_resources
 {
-	char *test;
+	int *forks;
 };
 
 // main simulation struct to
 struct s_simulation
 {
-	int	n_of_threads;
+	int		n_of_philosophers;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_sleep;
 	t_philosopher *philosophers;
 	t_shared_resources *resources;
 };
@@ -52,6 +61,18 @@ struct s_simulation
 
 // Function signatures
 
-// Struct init
-t_philosopher *ft_malloc_philosophers(int n_of_philos);
+// Simulation init functions
+void ft_init_simulation(t_simulation *simulation, char *argv[]);
+t_simulation *ft_malloc_simulation(void);
+
+// Philosphers init functions
 void ft_init_philosophres(t_simulation *simulation);
+
+// Shared resources init functions
+void ft_init_resources(t_simulation *simulation);
+
+// Cleaning functions
+void ft_clear_sim_memory(t_simulation *simulation);
+
+// Utility functions
+int	philosophers(t_simulation *simulation);
