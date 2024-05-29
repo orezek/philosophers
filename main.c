@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 20:15:10 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 21:25:57 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,19 @@ bool	threads_to_run(t_simulation *simulation)
 int	main(int argc, char *argv[])
 {
 	(void)argc;
-
 	t_simulation *simulation;
+	t_philosopher *philosopher;
+	int i;
+
 	simulation = ft_malloc_simulation();
 	ft_init_simulation(simulation, argv);
-
-	int i = 0;
-	printf("%ld\n", simulation->resources->sim_start_time);
+	i = 0;
 	while ((threads_to_run(simulation)))
 	{
-		pthread_create(&simulation->philosophers[i].thread, NULL, &ft_sim_execution, simulation);
-		printf("Philosopher: %d and resource fork available: %d\n", simulation->philosophers[i].id, simulation->resources->forks[i]);
+		philosopher = &simulation->philosophers[i];
+		pthread_create(&philosopher->thread, NULL, &ft_sim_execution, philosopher);
 		i++;
 	}
-	ft_sleep(100);
-	printf("End time: %ld\n", ft_get_current_time() - simulation->resources->sim_start_time);
 	i = 0;
 	while (threads_to_run(simulation))
 		pthread_join(simulation->philosophers[i++].thread, NULL);

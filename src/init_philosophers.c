@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:34:05 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 11:40:00 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 21:23:56 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void ft_init_philosophres(t_simulation *simulation)
 		simulation->philosophers[i].left_fork = 0;
 		simulation->philosophers[i].no_meals = 0;
 		simulation->philosophers[i].resources = simulation->resources;
+		simulation->philosophers[i].simulation = simulation;
 		i++;
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 13:02:26 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 21:37:46 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,21 @@ static int check_simulation_status(t_simulation *simulation)
 		return (1);
 }
 
-void	*ft_sim_execution(void *sim_struct)
+void	*ft_sim_execution(void *phil_struct)
 {
-	t_simulation *simulation;
-	simulation = (t_simulation *) sim_struct;
+	t_philosopher *philosopher;
+	philosopher = (t_philosopher *) phil_struct;
 
-	while (check_simulation_status(simulation))
+	printf("Thread id: %d\n", philosopher->id);
+
+	while (check_simulation_status(philosopher->simulation))
 	{
-		ft_lock_forks(simulation);
-		ft_eat_state(simulation);
-		ft_release_forks(simulation);
-		ft_sleep_state(simulation);
-		ft_think_state(simulation);
+		ft_lock_forks(philosopher);
+		ft_eat_state(philosopher);
+		ft_release_forks(philosopher);
+		ft_sleep_state(philosopher);
+		ft_think_state(philosopher);
+		philosopher->simulation->resources->simulation_ended = true;
 	}
 	printf("Simulation Ended:\n");
 	return (NULL);

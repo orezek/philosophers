@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 12:13:09 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 21:37:00 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ struct s_philosopher
 	long eating_start;
 	pthread_t thread;
 	t_shared_resources *resources;
+	t_simulation *simulation;
 };
 
 // resource struct to hold shared resources for the simulation
@@ -54,7 +55,7 @@ struct s_shared_resources
 	int		no_of_iterations;
 };
 
-// main simulation struct to
+// main simulation struct
 struct s_simulation
 {
 	pthread_t control_thread;
@@ -88,13 +89,13 @@ long		ft_get_sim_elapased_time(long sim_start_time);
 void		ft_sleep(long period);
 
 // Fork handling functions
-int	ft_lock_forks(t_simulation *simulation);
-int ft_release_forks(t_simulation *t_simulation);
+int	ft_lock_forks(t_philosopher *philosopher);
+int ft_release_forks(t_philosopher *philosopher);
 
 // For handling philosopher states
-int ft_eat_state(t_simulation *simulation);
-int ft_sleep_state(t_simulation *simulation);
-int ft_think_state(t_simulation *simulation);
+int ft_eat_state(t_philosopher *philosopher);
+int ft_sleep_state(t_philosopher *philosopher);
+int ft_think_state(t_philosopher *philosopher);
 
 // Thread execution functions
 void	*ft_sim_execution(void *simulation);
