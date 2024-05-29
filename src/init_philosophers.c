@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:34:05 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 09:40:02 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 11:40:00 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ void ft_init_philosophres(t_simulation *simulation)
 	t_philosopher *philosophers;
 	int i;
 
-	philosophers = ft_malloc_philosophers(simulation->n_of_philosophers);
+	philosophers = ft_malloc_philosophers(simulation->resources->n_of_philosophers);
 	if (!philosophers)
 		return ;
 	simulation->philosophers = philosophers;
 	i = 0;
-	while (i < simulation->n_of_philosophers)
+	while (i < simulation->resources->n_of_philosophers)
 	{
+		philosophers[i] = (t_philosopher){0};
 		simulation->philosophers[i].id = i + 1;
-		simulation->philosophers[i].eating_start = 120;
+		simulation->philosophers[i].eating_start = 0;
 		simulation->philosophers[i].right_fork = 0;
 		simulation->philosophers[i].left_fork = 0;
 		simulation->philosophers[i].no_meals = 0;

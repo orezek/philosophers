@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 11:07:37 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 11:27:48 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	philosophers(t_simulation *simulation)
 
 	if (!is_first)
 	{
-		no_of_philos = simulation->n_of_philosophers;
+		no_of_philos = simulation->resources->n_of_philosophers;
 		is_first = 1;
 	}
 	else

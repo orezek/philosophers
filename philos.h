@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 11:07:21 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 11:36:15 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,27 @@ struct s_philosopher
 	bool right_fork;
 	int no_meals;
 	long eating_start;
+	pthread_t thread;
 	t_shared_resources *resources;
 };
 
 // resource struct to hold shared resources for the simulation
 struct s_shared_resources
 {
-	int *forks;
-	bool simulation_ended;
-	long sim_start_time;
+	int		*forks;
+	bool	simulation_ended;
+	long	sim_start_time;
+	int		n_of_philosophers;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_sleep;
+	int		no_of_iterations;
 };
 
 // main simulation struct to
 struct s_simulation
 {
-	int		n_of_philosophers;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_sleep;
+	pthread_t control_thread;
 	t_philosopher *philosophers;
 	t_shared_resources *resources;
 };

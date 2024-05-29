@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 21:58:59 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 09:42:44 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 11:37:00 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int *ft_init_forks(t_simulation *simulation)
 	int	*forks;
 	int	i;
 
-	forks = ft_malloc_forks(simulation->n_of_philosophers);
+	forks = ft_malloc_forks(simulation->resources->n_of_philosophers);
 	i = 0;
-	while (i < simulation->n_of_philosophers)
+	while (i < simulation->resources->n_of_philosophers)
 	{
 		forks[i]= AVAILABLE;
 		i++;
@@ -45,8 +45,14 @@ void ft_init_resources(t_simulation *simulation)
 	resources = malloc(sizeof(t_shared_resources));
 	if (!resources)
 		exit(1);
-	resources->forks = ft_init_forks(simulation);
+	*resources = (t_shared_resources){0};
 	simulation->resources = resources;
-	simulation->resources->simulation_ended = false;
-	simulation->resources->sim_start_time = ft_get_current_time();
+	resources->n_of_philosophers = 5; // Comes from args
+	resources->forks = ft_init_forks(simulation);
+	resources->time_to_die = 100; // Comes from args;
+	resources->time_to_eat = 200; // Comes from args;
+	resources->time_sleep = 200; // Comes from args;
+	resources->no_of_iterations = 0;
+	resources->simulation_ended = false;
+	resources->sim_start_time = ft_get_current_time();
 }
