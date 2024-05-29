@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 21:58:59 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 11:37:00 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 13:06:20 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void ft_init_resources(t_simulation *simulation)
 	resources->time_to_eat = 200; // Comes from args;
 	resources->time_sleep = 200; // Comes from args;
 	resources->no_of_iterations = 0;
-	resources->simulation_ended = false;
+	resources->simulation_ended = true;
 	resources->sim_start_time = ft_get_current_time();
 }
