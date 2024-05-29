@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 12:59:19 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 20:15:10 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 // use static functions, static variables and function pointers
 
-//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_functions.c -Wall -Wextra -Werror -o philos && ./philos
+//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_functions.c ./src/thread_states.c ./src/forks.c  -Wall -Wextra -Werror -o philos && ./philos
+
 
 // states:
 
@@ -38,22 +39,22 @@
 // 	pthread_mutex_destroy(&dinner->shared->printf_mtx);
 // }
 
-int	start_threds(t_simulation *simulation)
+bool	threads_to_run(t_simulation *simulation)
 {
 	static int no_of_philos;
-	static int	is_first;
 
 	if (!simulation)
-		return (-1);
-
-	if (!is_first)
+		return (false);
+	if (no_of_philos < simulation->resources->n_of_philosophers)
 	{
-		no_of_philos = simulation->resources->n_of_philosophers;
-		is_first = 1;
+		no_of_philos++;
+		return (true);
 	}
 	else
-		no_of_philos--;
-	return (no_of_philos);
+	{
+		no_of_philos = 0;
+		return (false);
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -66,7 +67,7 @@ int	main(int argc, char *argv[])
 
 	int i = 0;
 	printf("%ld\n", simulation->resources->sim_start_time);
-	while ((start_threds(simulation)))
+	while ((threads_to_run(simulation)))
 	{
 		pthread_create(&simulation->philosophers[i].thread, NULL, &ft_sim_execution, simulation);
 		printf("Philosopher: %d and resource fork available: %d\n", simulation->philosophers[i].id, simulation->resources->forks[i]);
@@ -74,9 +75,8 @@ int	main(int argc, char *argv[])
 	}
 	ft_sleep(100);
 	printf("End time: %ld\n", ft_get_current_time() - simulation->resources->sim_start_time);
-
 	i = 0;
-	while (i < simulation->resources->n_of_philosophers)
+	while (threads_to_run(simulation))
 		pthread_join(simulation->philosophers[i++].thread, NULL);
 	ft_clear_sim_memory(simulation);
 	return (0);
