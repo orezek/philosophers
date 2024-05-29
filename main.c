@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/28 23:51:14 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 11:07:37 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // use static functions, static variables and function pointers
 
-//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c -Wall -Wextra -Werror -o philos && ./philos
+//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c -Wall -Wextra -Werror -o philos && ./philos
 
 // states:
 
@@ -26,6 +26,7 @@ int	philosophers(t_simulation *simulation)
 {
 	static int no_of_philos;
 	static int	is_first;
+
 	if (!simulation)
 		return (-1);
 
@@ -48,11 +49,15 @@ int	main(int argc, char *argv[])
 	ft_init_simulation(simulation, argv);
 
 	int i = 0;
-	while (philosophers(simulation))
+	printf("%ld\n", simulation->resources->sim_start_time);
+	while ((philosophers(simulation)))
 	{
-		printf("Philosopher: %d and resource his fork available: %d\n", simulation->philosophers[i].id, simulation->resources->forks[i]);
+
+		printf("Philosopher: %d and resource fork available: %d\n", simulation->philosophers[i].id, simulation->resources->forks[i]);
 		i++;
 	}
+	ft_sleep(100);
+	printf("End time: %ld\n", ft_get_current_time() - simulation->resources->sim_start_time);
 	ft_clear_sim_memory(simulation);
 	return (0);
 }

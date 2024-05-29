@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 23:24:35 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/28 23:51:58 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 09:40:21 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void ft_init_simulation(t_simulation *simulation, char *argv[])
 	simulation->time_to_die = 100; // Comes from args;
 	simulation->time_to_eat = 200; // Comes from args;
 	simulation->time_sleep = 200; // Comes from args;
-	ft_init_philosophres(simulation);
 	ft_init_resources(simulation);
+	ft_init_philosophres(simulation);
+
 }

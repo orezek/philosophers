@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/28 23:50:42 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/29 11:07:21 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ struct s_philosopher
 struct s_shared_resources
 {
 	int *forks;
+	bool simulation_ended;
+	long sim_start_time;
 };
 
 // main simulation struct to
@@ -76,3 +78,8 @@ void ft_clear_sim_memory(t_simulation *simulation);
 
 // Utility functions
 int	philosophers(t_simulation *simulation);
+
+// Time handling functions
+long int	ft_get_current_time(void);
+long		ft_get_sim_elapased_time(long sim_start_time);
+void		ft_sleep(long period);
