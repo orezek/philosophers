@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:48:25 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 00:05:39 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 01:18:51 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void ft_print_state(t_philosopher *p, char *message)
 
 int	ft_lock_forks(t_philosopher *philosopher)
 {
-	if ((philosopher->id) % 2 == 1)
+	if ((philosopher->id) % 2)
 		ft_lock_right_fork(philosopher);
 	else
 		ft_lock_left_fork(philosopher);
@@ -44,12 +44,12 @@ int ft_release_forks(t_philosopher *p)
 {
 	// release left fork
 	pthread_mutex_lock(&p->resources->forks_mtxs[p->id]);
-	p->right_fork = RELEASE;
+	p->left_fork = RELEASE;
 	p->resources->forks[p->id] = AVAILABLE;
 	pthread_mutex_unlock(&p->resources->forks_mtxs[p->id]);
 	// release right fork
 	pthread_mutex_lock(&p->resources->forks_mtxs[ft_get_right_fork_index(p)]);
-	p->left_fork = RELEASE;
+	p->right_fork = RELEASE;
 	p->resources->forks[ft_get_right_fork_index(p)] = AVAILABLE;
 	pthread_mutex_unlock(&p->resources->forks_mtxs[ft_get_right_fork_index(p)]);
 	// test

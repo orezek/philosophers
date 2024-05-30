@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 00:02:22 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 01:34:44 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ void	*ft_sim_execution(void *phil_struct)
 	t_philosopher *philosopher;
 	philosopher = (t_philosopher *) phil_struct;
 
-	pthread_mutex_lock(&philosopher->simulation->resources->print_console_mtx);
+	pthread_mutex_lock(&philosopher->resources->print_console_mtx); // 1 lock
 	while (check_simulation_status(philosopher->simulation))
 	{
-		pthread_mutex_unlock(&philosopher->simulation->resources->print_console_mtx);
-		//ft_lock_forks(philosopher);
+		pthread_mutex_unlock(&philosopher->resources->print_console_mtx); // 1 unlock
+		ft_lock_forks(philosopher);
 		ft_eat_state(philosopher);
 		ft_release_forks(philosopher);
 		ft_sleep_state(philosopher);
 		ft_think_state(philosopher);
 	}
-	pthread_mutex_lock(&philosopher->simulation->resources->print_console_mtx);
+	pthread_mutex_lock(&philosopher->resources->print_console_mtx);
 	printf("Thread id: %d Ended:\n", philosopher->id);
-	pthread_mutex_unlock(&philosopher->simulation->resources->print_console_mtx);
+	pthread_mutex_unlock(&philosopher->resources->print_console_mtx);
 	return (NULL);
 }

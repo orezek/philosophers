@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 00:09:23 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 01:32:36 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,10 @@ static void ft_print_state(t_philosopher *p, char *message)
 
 int ft_eat_state(t_philosopher *p)
 {
-	pthread_mutex_lock(&p->resources->print_console_mtx);
-	ft_print_state(p, "is eating before hold");
-	pthread_mutex_unlock(&p->resources->print_console_mtx);
-	if (p->right_fork == HOLD && p->left_fork == HOLD)
+	if (p->right_fork == 1 && p->left_fork == 1)
 	{
 		pthread_mutex_lock(&p->resources->print_console_mtx);
-		if (!p->resources->simulation_ended)
+		if (p->resources->simulation_ended)
 		{
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			return (0);
@@ -47,9 +44,9 @@ int ft_eat_state(t_philosopher *p)
 
 int ft_sleep_state(t_philosopher *p)
 {
-	pthread_mutex_lock(&p->resources->print_console_mtx);
 	if (!p->resources->simulation_ended)
 	{
+		pthread_mutex_lock(&p->resources->print_console_mtx);
 		ft_print_state(p, "is sleeping");
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		ft_sleep(p->resources->time_sleep);
@@ -59,9 +56,9 @@ int ft_sleep_state(t_philosopher *p)
 
 int ft_think_state(t_philosopher *p)
 {
-	pthread_mutex_lock(&p->resources->print_console_mtx);
 	if (!p->resources->simulation_ended)
 	{
+		pthread_mutex_lock(&p->resources->print_console_mtx);
 		ft_print_state(p, "is thinking");
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		ft_sleep(p->resources->time_sleep);
