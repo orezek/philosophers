@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 10:15:14 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/30 10:35:59 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 // use static functions, static variables and function pointers
 
-//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_functions.c ./src/thread_states.c ./src/forks.c  -Wall -Wextra -Werror -o philos && ./philos
+//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_execution.c ./src/thread_states.c ./src/forks.c ./src/control_thread.c ./src/init_mutex.c -Wall -Wextra -Werror -o philos && ./philos
+
 
 
 // states:
@@ -66,7 +67,6 @@ int	main(int argc, char *argv[])
 
 	simulation = ft_malloc_simulation();
 	ft_init_simulation(simulation, argv);
-	ft_init_mutexes(simulation);
 	i = 0;
 	while ((threads_to_run(simulation)))
 	{
