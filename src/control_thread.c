@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_simulation.c                                  :+:      :+:    :+:   */
+/*   control_thread.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 23:24:35 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 10:15:04 by aldokezer        ###   ########.fr       */
+/*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
+/*   Updated: 2024/05/30 09:43:29 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
 
-t_simulation *ft_malloc_simulation(void)
-{
-	t_simulation *simulation;
-	simulation = malloc(sizeof(t_simulation));
-	if (!simulation)
-		exit(1);
-	return (simulation);
-}
 
-void ft_init_simulation(t_simulation *simulation, char *argv[])
+void *ft_simulation_control(void *sim_void)
 {
-	(void)argv;
-	*simulation = (t_simulation){0}; // Initializes struct members to 0, NULL and 0.0
-	ft_init_resources(simulation);
-	ft_init_philosophres(simulation);
-	//ft_init_mutexes(simulation);
+	//To do: implement
+	t_simulation *simulation;
+	simulation = (t_simulation *) sim_void;
+	//(void)simulation;
+	while (!simulation->resources->simulation_ended)
+		printf("Control Thread\n");
+	return (NULL);
 }

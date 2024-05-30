@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 21:58:59 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 20:21:20 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/30 10:27:21 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ static int *ft_init_forks(t_simulation *simulation)
 	return (forks);
 }
 
+static pthread_mutex_t *ft_malloc_mutexes(int n_of_philos)
+{
+	pthread_mutex_t *mutexes;
+
+	mutexes = malloc(sizeof(pthread_mutex_t) * (n_of_philos));
+	if (!mutexes)
+		return (NULL);
+	else
+		return (mutexes);
+}
+
 void ft_init_resources(t_simulation *simulation)
 {
 	t_shared_resources *resources;
@@ -49,6 +60,7 @@ void ft_init_resources(t_simulation *simulation)
 	simulation->resources = resources;
 	resources->n_of_philosophers = 5; // Comes from args
 	resources->forks = ft_init_forks(simulation);
+	resources->forks_mtxs = ft_malloc_mutexes(simulation->resources->n_of_philosophers);
 	resources->time_to_die = 100; // Comes from args;
 	resources->time_to_eat = 200; // Comes from args;
 	resources->time_sleep = 200; // Comes from args;

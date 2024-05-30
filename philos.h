@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 21:37:00 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/30 10:13:04 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ struct s_philosopher
 	bool right_fork;
 	int no_meals;
 	long eating_start;
+	pthread_mutex_t	philo_exec_time_mtx;
+	pthread_mutex_t	philo_exec_iter_mtx;
 	pthread_t thread;
 	t_shared_resources *resources;
 	t_simulation *simulation;
@@ -53,6 +55,8 @@ struct s_shared_resources
 	long	time_to_eat;
 	long	time_sleep;
 	int		no_of_iterations;
+	pthread_mutex_t	print_console_mtx;
+	pthread_mutex_t	*forks_mtxs;
 };
 
 // main simulation struct
@@ -72,16 +76,19 @@ void ft_init_simulation(t_simulation *simulation, char *argv[]);
 t_simulation *ft_malloc_simulation(void);
 
 // Philosphers init functions
-void ft_init_philosophres(t_simulation *simulation);
+void	ft_init_philosophres(t_simulation *simulation);
 
 // Shared resources init functions
-void ft_init_resources(t_simulation *simulation);
+void	ft_init_resources(t_simulation *simulation);
+
+// Mutex init functions
+void	ft_init_mutexes(t_simulation *simulation);
 
 // Cleaning functions
-void ft_clear_sim_memory(t_simulation *simulation);
+void	ft_clear_sim_memory(t_simulation *simulation);
+void	ft_clear_mutexes(t_simulation *simulation);
 
 // Utility functions
-int	philosophers(t_simulation *simulation);
 
 // Time handling functions
 long int	ft_get_current_time(void);
@@ -98,4 +105,7 @@ int ft_sleep_state(t_philosopher *philosopher);
 int ft_think_state(t_philosopher *philosopher);
 
 // Thread execution functions
-void	*ft_sim_execution(void *simulation);
+void	*ft_sim_execution(void *philosopher);
+
+// Control thread for simulation status
+void *ft_simulation_control(void *simulation);

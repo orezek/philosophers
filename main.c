@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/29 21:25:57 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/30 10:15:14 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char *argv[])
 
 	simulation = ft_malloc_simulation();
 	ft_init_simulation(simulation, argv);
+	ft_init_mutexes(simulation);
 	i = 0;
 	while ((threads_to_run(simulation)))
 	{
@@ -73,9 +74,12 @@ int	main(int argc, char *argv[])
 		pthread_create(&philosopher->thread, NULL, &ft_sim_execution, philosopher);
 		i++;
 	}
+	pthread_create(&simulation->control_thread, NULL, &ft_simulation_control, simulation);
 	i = 0;
 	while (threads_to_run(simulation))
 		pthread_join(simulation->philosophers[i++].thread, NULL);
+	pthread_join(simulation->control_thread, NULL);
+	ft_clear_mutexes(simulation);
 	ft_clear_sim_memory(simulation);
 	return (0);
 }
