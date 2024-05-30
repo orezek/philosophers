@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:34:05 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 10:07:40 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/30 21:44:00 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void ft_init_philosophres(t_simulation *simulation)
 	while (i < simulation->resources->n_of_philosophers)
 	{
 		philosophers[i] = (t_philosopher){0};
-		simulation->philosophers[i].id = i + 1;
+		simulation->philosophers[i].id = i;
 		simulation->philosophers[i].eating_start = ft_get_current_time();
-		simulation->philosophers[i].right_fork = 0;
-		simulation->philosophers[i].left_fork = 0;
+		simulation->philosophers[i].right_fork = AVAILABLE;
+		simulation->philosophers[i].left_fork = AVAILABLE;
 		simulation->philosophers[i].no_meals = 0;
 		simulation->philosophers[i].resources = simulation->resources;
 		simulation->philosophers[i].simulation = simulation;

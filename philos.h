@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 10:13:04 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/30 20:35:48 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ typedef  enum
 	AVAILABLE = 1
 } Status;
 
+typedef  enum
+{
+	LEFT_FORK = 0,
+	RIGHT_FORK = 1
+} Side;
+
+typedef  enum
+{
+	RELEASE = 0,
+	HOLD = 1
+} State;
+
 // thread struct aka philosopher
 struct s_philosopher
 {
@@ -37,8 +49,8 @@ struct s_philosopher
 	bool right_fork;
 	int no_meals;
 	long eating_start;
-	pthread_mutex_t	philo_exec_time_mtx;
-	pthread_mutex_t	philo_exec_iter_mtx;
+	pthread_mutex_t	no_meals_mtx;
+	pthread_mutex_t	eating_start_mtx;
 	pthread_t thread;
 	t_shared_resources *resources;
 	t_simulation *simulation;
@@ -98,6 +110,10 @@ void		ft_sleep(long period);
 // Fork handling functions
 int	ft_lock_forks(t_philosopher *philosopher);
 int ft_release_forks(t_philosopher *philosopher);
+
+// Fork utils
+int	ft_lock_left_fork(t_philosopher *p);
+int	ft_lock_right_fork(t_philosopher *p);
 
 // For handling philosopher states
 int ft_eat_state(t_philosopher *philosopher);
