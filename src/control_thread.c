@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 13:48:52 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 20:45:20 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void ft_print_state(t_philosopher *p, char *message)
 {
 	long philosopher_eat_start;
 	philosopher_eat_start = ft_get_sim_elapased_time(p->resources->sim_start_time);
-	printf("%-10ld%-6d%s\n", philosopher_eat_start, p->id, message);
+	printf("%-10ld%-6d%s\n", philosopher_eat_start, p->id + 1, message);
 }
 
 static bool	is_time_to_die_exceeded(t_simulation *simulation)
@@ -32,7 +32,7 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 		if (ft_get_current_time() - p->eating_start > p->resources->time_to_die)
 		{
 			pthread_mutex_lock(&p->resources->print_console_mtx);
-			ft_print_state(p, "is Dead");
+			ft_print_state(p, "died");
 			simulation->resources->simulation_ended = true;
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			pthread_mutex_unlock(&p->eating_start_mtx);
@@ -56,8 +56,8 @@ static bool is_execution_complete(t_simulation *simulation)
 		if (p->no_meals > simulation->resources->no_of_iterations)
 		{
 			pthread_mutex_lock(&p->resources->print_console_mtx);
-			ft_print_state(p, "No of rounds exceeded");
-			printf("Round number: [%d]\n", p->no_meals);
+			//ft_print_state(p, "No of rounds exceeded");
+			//printf("Round number: [%d]\n", p->no_meals);
 			simulation->resources->simulation_ended = true;
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			pthread_mutex_unlock(&p->no_meals_mtx);

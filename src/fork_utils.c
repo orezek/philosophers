@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 12:04:17 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 20:45:46 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void static ft_print_fork_status(t_philosopher *philospher, Side fork)
 	long fork_time;
 
 	fork_time = ft_get_current_time() - philospher->resources->sim_start_time;
-	if (fork)
-		printf("%-10ld%-6dhas taken a right fork\n", fork_time, philospher->id);
-	else
-		printf("%-10ld%-6dhas taken a left fork\n", fork_time, philospher->id);
+	if (fork == RIGHT_FORK)
+		printf("%-10ld%-6dhas taken a fork\n", fork_time, philospher->id + 1);
+	else if (fork == LEFT_FORK)
+		printf("%-10ld%-6dhas taken a fork\n", fork_time, philospher->id + 1);
 }
 
 static int get_right_fork_index(t_philosopher *p)

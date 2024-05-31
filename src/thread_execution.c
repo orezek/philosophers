@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 10:23:43 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 20:03:24 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	*ft_sim_execution(void *phil_struct)
 		ft_sleep_state(philosopher);
 		ft_think_state(philosopher);
 	}
-	pthread_mutex_lock(&philosopher->resources->print_console_mtx);
-	printf("Thread id: %d Ended:\n", philosopher->id);
-	pthread_mutex_unlock(&philosopher->resources->print_console_mtx);
+	// pthread_mutex_lock(&philosopher->resources->print_console_mtx);
+	// printf("Thread id: %d Ended: %d, %d, %d\n", philosopher->id, philosopher->no_meals, philosopher->left_fork, philosopher->right_fork);
+	// pthread_mutex_unlock(&philosopher->resources->print_console_mtx);
 	return (NULL);
 }
