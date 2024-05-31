@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 10:19:22 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 12:04:17 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void static ft_print_fork_status(t_philosopher *philospher, Side fork)
 		printf("%-10ld%-6dhas taken a left fork\n", fork_time, philospher->id);
 }
 
-static int ft_get_right_fork_index(t_philosopher *p)
+static int get_right_fork_index(t_philosopher *p)
 {
 	return (p->id + 1) % p->resources->n_of_philosophers;
 }
@@ -54,19 +54,19 @@ int	ft_lock_right_fork(t_philosopher *p)
 {
 	while (p->resources->simulation_ended == 0)
 	{
-		pthread_mutex_lock(&p->resources->forks_mtxs[ft_get_right_fork_index(p)]); // 1 fork_mtx lock
-		if (p->resources->forks[ft_get_right_fork_index(p)] == AVAILABLE)
+		pthread_mutex_lock(&p->resources->forks_mtxs[get_right_fork_index(p)]); // 1 fork_mtx lock
+		if (p->resources->forks[get_right_fork_index(p)] == AVAILABLE)
 		{
-			p->resources->forks[ft_get_right_fork_index(p)] = TAKEN;
+			p->resources->forks[get_right_fork_index(p)] = TAKEN;
 			p->right_fork = HOLD;
-			pthread_mutex_unlock(&p->resources->forks_mtxs[ft_get_right_fork_index(p)]); // 1 fork_mtx unlock
+			pthread_mutex_unlock(&p->resources->forks_mtxs[get_right_fork_index(p)]); // 1 fork_mtx unlock
 			pthread_mutex_lock(&p->resources->print_console_mtx); // 3 mtx lock
 			if (p->resources->simulation_ended == false)
 				ft_print_fork_status(p, RIGHT_FORK);
 			pthread_mutex_unlock(&p->resources->print_console_mtx); // 3 mtx unlock
 			return(0);
 		}
-		pthread_mutex_unlock(&p->resources->forks_mtxs[ft_get_right_fork_index(p)]); // 1 fork_mtx unlock
+		pthread_mutex_unlock(&p->resources->forks_mtxs[get_right_fork_index(p)]); // 1 fork_mtx unlock
 	}
 	return (0);
 }

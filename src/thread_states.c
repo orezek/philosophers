@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 09:38:23 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 12:07:30 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int ft_sleep_state(t_philosopher *p)
 	pthread_mutex_lock(&p->resources->print_console_mtx);
 	if (!p->resources->simulation_ended)
 	{
-		// pthread_mutex_unlock(&p->resources->print_console_mtx);
 		ft_print_state(p, "is sleeping");
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		ft_sleep(p->resources->time_sleep);
