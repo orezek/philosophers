@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 20:35:48 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 13:51:05 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <sys/time.h>
 # include <stdbool.h>
 # include <pthread.h>
+
+#define IGNORE -1
 
 typedef struct s_philosopher t_philosopher;
 typedef struct s_shared_resources t_shared_resources;
