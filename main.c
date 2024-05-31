@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 13:08:30 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/05/31 21:18:21 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // use static functions, static variables and function pointers
 
-//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_execution.c ./src/thread_states.c ./src/forks.c ./src/control_thread.c ./src/init_mutex.c -Wall -Wextra -Werror -o philos && ./philos
+//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_execution.c ./src/thread_states.c ./src/forks.c ./src/control_thread.c ./src/init_mutex.c ./src/fork_utils.c -Wall -Wextra -Werror -o philos && ./philos
 
 
 
