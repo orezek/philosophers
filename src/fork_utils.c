@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 20:45:46 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 21:10:31 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static int get_right_fork_index(t_philosopher *p)
 {
 	return (p->id + 1) % p->resources->n_of_philosophers;
 }
+
+// static int get_left_fork_index(t_philosopher *p)
+// {
+// 	return (p->id);
+// }
 
 
 int	ft_lock_left_fork(t_philosopher *p)
