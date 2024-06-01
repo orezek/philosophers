@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 22:40:49 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 01:40:28 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef  enum
 	RELEASE = 0,
 	HOLD = 1
 } State;
+
+typedef enum
+{
+	MILLISECOND,
+	MICROSECOND,
+	SECONDS
+} Time_code;
 
 // thread struct aka philosopher
 struct s_philosopher
@@ -108,6 +115,8 @@ void	ft_clear_mutexes(t_simulation *simulation);
 long int	ft_get_current_time(void);
 long		ft_get_sim_elapased_time(long sim_start_time);
 void		ft_sleep(long period);
+void		ft_precise_sleep(long period, t_philosopher *p);
+long	gettime(int time_code);
 
 // Fork handling functions
 void	ft_lock_forks(t_philosopher *philosopher);

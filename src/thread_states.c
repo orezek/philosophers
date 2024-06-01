@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 00:28:44 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 01:42:55 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_eat_state(t_philosopher *p)
 		pthread_mutex_lock(&p->eating_start_mtx);
 		p->eating_start = ft_get_current_time();
 		pthread_mutex_unlock(&p->eating_start_mtx);
-		ft_sleep(p->resources->time_to_eat);
+		ft_sleep(p->resources->time_sleep);
+		//ft_precise_sleep(p->resources->time_to_eat, p);
 		pthread_mutex_lock(&p->no_meals_mtx);
 		p->no_meals++;
 		pthread_mutex_unlock(&p->no_meals_mtx);
@@ -56,6 +57,7 @@ void	ft_sleep_state(t_philosopher *p)
 	}
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
 	ft_print_state(p, "is sleeping");
+	//ft_precise_sleep(p->resources->time_sleep, p);
 	ft_sleep(p->resources->time_sleep);
 }
 

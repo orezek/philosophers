@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:48:25 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 00:31:25 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 01:06:14 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_lock_forks(t_philosopher *p)
 		ft_lock_right_fork(p);
 }
 
-// O.R Implementation V2
+//O.R Implementation V2
 // void	ft_lock_forks(t_philosopher *philosopher)
 // {
 // 	int	left_fork_index;

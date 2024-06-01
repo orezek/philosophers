@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 00:52:20 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 01:32:12 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_lock_left_fork(t_philosopher *p)
 			return (0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[p->id]);
-		sched_yield();
+		//sched_yield();
 	}
 	return (0);
 }
@@ -73,7 +73,7 @@ int	ft_lock_right_fork(t_philosopher *p)
 			return(0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[right_fork_index]);
-		sched_yield();
+		//sched_yield();
 	}
 	return (0);
 }
