@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 22:06:32 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 22:34:11 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,29 @@ int	ft_eat_state(t_philosopher *p)
 	return (0);
 }
 
-int	ft_sleep_state(t_philosopher *p)
+void	ft_sleep_state(t_philosopher *p)
 {
 	pthread_mutex_lock(&p->resources->print_console_mtx);
 	if (p->resources->simulation_ended)
 	{
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
-		return (0);
+		return ;
 	}
 	ft_print_state(p, "is sleeping");
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
 	ft_sleep(p->resources->time_sleep);
-	return (0);
+	//return (0);
 }
 
-int	ft_think_state(t_philosopher *p)
+void	ft_think_state(t_philosopher *p)
 {
 	pthread_mutex_lock(&p->resources->print_console_mtx);
 	if (p->resources->simulation_ended)
 	{
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
-		return (0);
+		return ;
 	}
 	ft_print_state(p, "is thinking");
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
-	return (0);
+	//return (0);
 }

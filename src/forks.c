@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:48:25 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 21:41:55 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 22:30:13 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,33 +66,26 @@ id 2 will proceed to move to states
 ----------------------------------------------
 */
 
+inline static int	get_right_fork_index(t_philosopher *p)
+{
+	return ((p->id + 1) % p->resources->n_of_philosophers);
+}
+
 // O.R Implementation V1
-// int	ft_lock_forks(t_philosopher *p)
+// void	ft_lock_forks(t_philosopher *p)
 // {
 // 	if (p->id % 2)
 // 		ft_lock_left_fork(p); // i + 0 liche id 1,3,5,7....
 // 	else
 // 		ft_lock_right_fork(p); // i + 1 sude id 0,2,4,6.....
-// 	if (p->right_fork == 1)
-// 	{
+// 	if (p->right_fork == HOLD)
 // 		ft_lock_left_fork(p);
-// 		return (0);
-// 	}
-// 	else if (p->left_fork == 1)
-// 	{
+// 	else if (p->left_fork == HOLD)
 // 		ft_lock_right_fork(p);
-// 		return (0);
-// 	}
-// 	return (0);
 // }
 
-static int	get_right_fork_index(t_philosopher *p)
-{
-	return ((p->id + 1) % p->resources->n_of_philosophers);
-}
-
-// // O.R Implementation V2
-int	ft_lock_forks(t_philosopher *philosopher)
+// O.R Implementation V2
+void	ft_lock_forks(t_philosopher *philosopher)
 {
 	int	left_fork_index;
 	int	right_fork_index;
@@ -111,10 +104,9 @@ int	ft_lock_forks(t_philosopher *philosopher)
 		if (philosopher->right_fork == AVAILABLE)
 			ft_lock_left_fork(philosopher);
 	}
-	return (0);
 }
 
-int	ft_release_forks(t_philosopher *p)
+void	ft_release_forks(t_philosopher *p)
 {
 	int	left_index;
 	int	right_index;
@@ -129,5 +121,4 @@ int	ft_release_forks(t_philosopher *p)
 	p->right_fork = RELEASE;
 	p->resources->forks[right_index] = AVAILABLE;
 	pthread_mutex_unlock(&p->resources->forks_mtxs[right_index]);
-	return (0);
 }
