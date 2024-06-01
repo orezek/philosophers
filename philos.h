@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 22:35:39 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 22:40:49 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	ft_lock_left_fork(t_philosopher *p);
 int	ft_lock_right_fork(t_philosopher *p);
 
 // For handling philosopher states
-int ft_eat_state(t_philosopher *philosopher);
+void ft_eat_state(t_philosopher *philosopher);
 void ft_sleep_state(t_philosopher *philosopher);
 void ft_think_state(t_philosopher *philosopher);
 

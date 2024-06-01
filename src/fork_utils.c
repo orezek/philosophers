@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 22:23:31 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 22:42:55 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void static ft_print_fork_status(t_philosopher *philospher, Side fork)
 
 inline static int get_right_fork_index(t_philosopher *p)
 {
-	return (p->id + 1) % p->resources->n_of_philosophers;
+	return ((p->id + 1) % p->resources->n_of_philosophers);
 }
 
 // static int get_left_fork_index(t_philosopher *p)

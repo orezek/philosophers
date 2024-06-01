@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/31 20:45:20 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 23:02:29 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void ft_print_state(t_philosopher *p, char *message)
 static bool	is_time_to_die_exceeded(t_simulation *simulation)
 {
 	int i;
-
 	t_philosopher *p;
+
 	i = 0;
 	while (i < simulation->resources->n_of_philosophers)
 	{
-		p = &simulation->philosophers[i++];
+		p = &simulation->philosophers[i];
 		pthread_mutex_lock(&p->eating_start_mtx);
 		if (ft_get_current_time() - p->eating_start > p->resources->time_to_die)
 		{
@@ -38,6 +38,7 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 			pthread_mutex_unlock(&p->eating_start_mtx);
 			return (true);
 		}
+		i++;
 		pthread_mutex_unlock(&p->eating_start_mtx);
 	}
 	return (false);
@@ -46,24 +47,23 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 static bool is_execution_complete(t_simulation *simulation)
 {
 	int i;
-
 	t_philosopher *p;
+
 	i = 0;
 	while (i < simulation->resources->n_of_philosophers)
 	{
-		p = &simulation->philosophers[i++];
+		p = &simulation->philosophers[i];
 		pthread_mutex_lock(&p->no_meals_mtx);
 		if (p->no_meals > simulation->resources->no_of_iterations)
 		{
 			pthread_mutex_lock(&p->resources->print_console_mtx);
-			//ft_print_state(p, "No of rounds exceeded");
-			//printf("Round number: [%d]\n", p->no_meals);
 			simulation->resources->simulation_ended = true;
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			pthread_mutex_unlock(&p->no_meals_mtx);
 			return (true);
 		}
 		pthread_mutex_unlock(&p->no_meals_mtx);
+		i++;
 	}
 	return (false);
 }
@@ -84,7 +84,6 @@ void *ft_simulation_control(void *sim_void)
 			if (is_execution_complete(simulation))
 				return (NULL);
 		}
-
 	}
 	return (NULL);
 }
