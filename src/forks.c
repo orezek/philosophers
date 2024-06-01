@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:48:25 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 23:34:39 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 00:31:25 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_release_forks(t_philosopher *p)
 	pthread_mutex_lock(&p->resources->forks_mtxs[left_index]);
 	p->left_fork = RELEASE;
 	p->resources->forks[left_index] = AVAILABLE;
-	pthread_mutex_unlock(&p->resources->forks_mtxs[p->id]);
+	pthread_mutex_unlock(&p->resources->forks_mtxs[left_index]);
 	pthread_mutex_lock(&p->resources->forks_mtxs[right_index]);
 	p->right_fork = RELEASE;
 	p->resources->forks[right_index] = AVAILABLE;

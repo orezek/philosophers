@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 23:37:47 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 00:28:44 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static void	ft_print_state(t_philosopher *p, char *message)
 {
 	long	philosopher_eat_start;
 
+	pthread_mutex_lock(&p->resources->print_console_mtx);
 	philosopher_eat_start = ft_get_sim_elapased_time(p->resources->sim_start_time);
 	printf("%-10ld%-6d%s\n", philosopher_eat_start, p->id + 1, message);
+	pthread_mutex_unlock(&p->resources->print_console_mtx);
 }
 
 void	ft_eat_state(t_philosopher *p)
@@ -30,8 +32,8 @@ void	ft_eat_state(t_philosopher *p)
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			return ;
 		}
-		ft_print_state(p, "is eating");
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
+		ft_print_state(p, "is eating");
 		pthread_mutex_lock(&p->eating_start_mtx);
 		p->eating_start = ft_get_current_time();
 		pthread_mutex_unlock(&p->eating_start_mtx);
@@ -52,8 +54,8 @@ void	ft_sleep_state(t_philosopher *p)
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		return ;
 	}
-	ft_print_state(p, "is sleeping");
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
+	ft_print_state(p, "is sleeping");
 	ft_sleep(p->resources->time_sleep);
 }
 
@@ -65,6 +67,6 @@ void	ft_think_state(t_philosopher *p)
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		return ;
 	}
-	ft_print_state(p, "is thinking");
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
+	ft_print_state(p, "is thinking");
 }
