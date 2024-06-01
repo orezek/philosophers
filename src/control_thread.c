@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 23:02:29 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 23:43:42 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 			pthread_mutex_unlock(&p->eating_start_mtx);
 			return (true);
 		}
-		i++;
 		pthread_mutex_unlock(&p->eating_start_mtx);
+		i++;
 	}
 	return (false);
 }

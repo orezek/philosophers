@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:48:25 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 22:30:13 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 23:34:39 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,40 +71,40 @@ inline static int	get_right_fork_index(t_philosopher *p)
 	return ((p->id + 1) % p->resources->n_of_philosophers);
 }
 
-// O.R Implementation V1
-// void	ft_lock_forks(t_philosopher *p)
-// {
-// 	if (p->id % 2)
-// 		ft_lock_left_fork(p); // i + 0 liche id 1,3,5,7....
-// 	else
-// 		ft_lock_right_fork(p); // i + 1 sude id 0,2,4,6.....
-// 	if (p->right_fork == HOLD)
-// 		ft_lock_left_fork(p);
-// 	else if (p->left_fork == HOLD)
-// 		ft_lock_right_fork(p);
-// }
+//O.R Implementation V1
+void	ft_lock_forks(t_philosopher *p)
+{
+	if (p->id % 2)
+		ft_lock_left_fork(p); // i + 0 liche id 1,3,5,7....
+	else
+		ft_lock_right_fork(p); // i + 1 sude id 0,2,4,6.....
+	if (p->right_fork == HOLD)
+		ft_lock_left_fork(p);
+	else if (p->left_fork == HOLD)
+		ft_lock_right_fork(p);
+}
 
 // O.R Implementation V2
-void	ft_lock_forks(t_philosopher *philosopher)
-{
-	int	left_fork_index;
-	int	right_fork_index;
+// void	ft_lock_forks(t_philosopher *philosopher)
+// {
+// 	int	left_fork_index;
+// 	int	right_fork_index;
 
-	left_fork_index = philosopher->id;
-	right_fork_index = get_right_fork_index(philosopher);
-	if (left_fork_index < right_fork_index)
-	{
-		ft_lock_left_fork(philosopher);
-		if (philosopher->left_fork == AVAILABLE)
-			ft_lock_right_fork(philosopher);
-	}
-	else
-	{
-		ft_lock_right_fork(philosopher);
-		if (philosopher->right_fork == AVAILABLE)
-			ft_lock_left_fork(philosopher);
-	}
-}
+// 	left_fork_index = philosopher->id;
+// 	right_fork_index = get_right_fork_index(philosopher);
+// 	if (left_fork_index < right_fork_index)
+// 	{
+// 		ft_lock_left_fork(philosopher);
+// 		if (philosopher->left_fork == AVAILABLE)
+// 			ft_lock_right_fork(philosopher);
+// 	}
+// 	else
+// 	{
+// 		ft_lock_right_fork(philosopher);
+// 		if (philosopher->right_fork == AVAILABLE)
+// 			ft_lock_left_fork(philosopher);
+// 	}
+// }
 
 void	ft_release_forks(t_philosopher *p)
 {

@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 22:40:37 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/01 23:37:47 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_sleep_state(t_philosopher *p)
 	ft_print_state(p, "is sleeping");
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
 	ft_sleep(p->resources->time_sleep);
-	//return (0);
 }
 
 void	ft_think_state(t_philosopher *p)
@@ -68,5 +67,4 @@ void	ft_think_state(t_philosopher *p)
 	}
 	ft_print_state(p, "is thinking");
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
-	//return (0);
 }
