@@ -1,35 +1,57 @@
-# Define the compiler
-CC = gcc
+# Compiler
+CC = cc
 
-# Define the flags
-CFLAGS = -Wall -Wextra -Werror -O3 -pthread
+# Compiler flags
+CFLAGS = -Wall -Wextra -Werror
 
-# Define the source files
-SRCS = main.c init_simulation.c fork_utils.c init_resources.c forks.c time_functions.c clean_allocs.c control_thread.c init_philosophers.c thread_states.c thread_execution.c
+# Directories
+SRC_DIR = ./src
+OBJ_DIR = ./obj
+INC_DIR = ./includes
 
-# Define the header files
-HEADERS = philos.h
+# Source files
+SRCS = main.c \
+       $(SRC_DIR)/clean_allocs.c \
+       $(SRC_DIR)/control_thread.c \
+       $(SRC_DIR)/forks.c \
+       $(SRC_DIR)/fork_utils.c \
+       $(SRC_DIR)/init_mutex.c \
+       $(SRC_DIR)/init_philosophers.c \
+       $(SRC_DIR)/init_resources.c \
+       $(SRC_DIR)/init_simulation.c \
+       $(SRC_DIR)/thread_execution.c \
+       $(SRC_DIR)/thread_states.c \
+       $(SRC_DIR)/time_functions.c
 
-# Define the output executable
-OUT = philo
+# Object files
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
 
-# Define the object files
-OBJS = $(SRCS:.c=.o)
+# Executable
+NAME = philo
 
-# Default target
-all: $(OUT)
+# Include directories
+INCLUDES = -I$(INC_DIR)
 
-# Rule to build the executable
-$(OUT): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+# Rules
+all: fclean $(NAME)
 
-# Rule to build object files
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-# Clean up
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 clean:
-	rm -f $(OBJS) $(OUT)
+	rm -rf $(OBJ_DIR)
 
-# Phony targets
-.PHONY: all clean
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
