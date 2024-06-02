@@ -1,4 +1,6 @@
-philos
 .DS_Store
 .vscode/
 main.dSYM/
+obj/*.o
+!obj/
+philo

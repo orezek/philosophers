@@ -1,57 +1,42 @@
-# Compiler
 CC = cc
-
-# Compiler flags
 CFLAGS = -Wall -Wextra -Werror
+SRCDIR = ./src
+OBJDIR = ./obj
 
-# Directories
-SRC_DIR = ./src
-OBJ_DIR = ./obj
-INC_DIR = ./includes
-
-# Source files
 SRCS = main.c \
-       $(SRC_DIR)/clean_allocs.c \
-       $(SRC_DIR)/control_thread.c \
-       $(SRC_DIR)/forks.c \
-       $(SRC_DIR)/fork_utils.c \
-       $(SRC_DIR)/init_mutex.c \
-       $(SRC_DIR)/init_philosophers.c \
-       $(SRC_DIR)/init_resources.c \
-       $(SRC_DIR)/init_simulation.c \
-       $(SRC_DIR)/thread_execution.c \
-       $(SRC_DIR)/thread_states.c \
-       $(SRC_DIR)/time_functions.c
+       $(SRCDIR)/init_resources.c \
+       $(SRCDIR)/fork_utils.c \
+       $(SRCDIR)/init_mutex.c \
+       $(SRCDIR)/thread_execution.c \
+       $(SRCDIR)/control_thread.c \
+       $(SRCDIR)/thread_states.c \
+       $(SRCDIR)/time_functions.c \
+       $(SRCDIR)/clean_allocs.c \
+       $(SRCDIR)/init_simulation.c \
+       $(SRCDIR)/init_philosophers.c \
+       $(SRCDIR)/forks.c
 
-# Object files
-OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
+# Adjust the object files path transformation
+OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(notdir $(SRCS)))
+DEPS = philos.h
 
-# Executable
-NAME = philo
+# Rules for compiling source files to object files
+$(OBJDIR)/main.o: main.c $(DEPS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Include directories
-INCLUDES = -I$(INC_DIR)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(DEPS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Rules
-all: fclean $(NAME)
+all: $(OBJDIR) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o philo
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+# Create the object directory if it does not exist
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -f $(OBJDIR)/*.o philo
 
-fclean: clean
-	rm -f $(NAME)
+re: clean all
 
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY: all clean re
