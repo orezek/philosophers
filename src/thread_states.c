@@ -6,13 +6,13 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 22:01:04 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 22:04:58 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
 
-static void	ft_print_state(t_philosopher *p, char *message)
+void	ft_print_state(t_philosopher *p, char *message)
 {
 	long	philosopher_eat_start;
 

@@ -6,18 +6,11 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/01 23:43:42 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 22:06:14 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
-
-static void ft_print_state(t_philosopher *p, char *message)
-{
-	long philosopher_eat_start;
-	philosopher_eat_start = ft_get_sim_elapased_time(p->resources->sim_start_time);
-	printf("%-10ld%-6d%s\n", philosopher_eat_start, p->id + 1, message);
-}
 
 static bool	is_time_to_die_exceeded(t_simulation *simulation)
 {
