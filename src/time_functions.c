@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 09:06:07 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 01:44:42 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 23:52:47 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_sleep(long period)
 
 	init_time = ft_get_current_time();
 	while ((ft_get_current_time() - init_time) < period)
-		usleep(10);
+		usleep(1);
 }
 
 

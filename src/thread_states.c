@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 22:04:58 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 23:56:36 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ void	ft_print_state(t_philosopher *p, char *message)
 
 void	ft_eat_state(t_philosopher *p)
 {
-	pthread_mutex_lock(&p->resources->sim_ended_mtx);
-	if (p->right_fork == HOLD && p->left_fork == HOLD && p->resources->simulation_ended == 0)
+	if (p->right_fork == HOLD && p->left_fork == HOLD)
 	{
+		pthread_mutex_lock(&p->resources->sim_ended_mtx);
+		if (p->resources->simulation_ended)
+		{
+			pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+			return ;
+		}
 		pthread_mutex_unlock(&p->resources->sim_ended_mtx);
 		pthread_mutex_lock(&p->eating_start_mtx);
 		p->eating_start = ft_get_current_time();
@@ -63,6 +68,6 @@ void	ft_think_state(t_philosopher *p)
 		pthread_mutex_unlock(&p->resources->sim_ended_mtx);
 		return ;
 	}
-	pthread_mutex_unlock(&p->resources->sim_ended_mtx);
 	ft_print_state(p, "is thinking");
+	pthread_mutex_unlock(&p->resources->sim_ended_mtx);
 }
