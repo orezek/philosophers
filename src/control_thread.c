@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 22:06:14 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/02 22:11:56 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 		pthread_mutex_lock(&p->eating_start_mtx);
 		if (ft_get_current_time() - p->eating_start > p->resources->time_to_die)
 		{
-			pthread_mutex_lock(&p->resources->print_console_mtx);
-			ft_print_state(p, "died");
-			simulation->resources->simulation_ended = true;
-			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			pthread_mutex_unlock(&p->eating_start_mtx);
+			ft_print_state(p, "died");
+			pthread_mutex_lock(&p->resources->sim_ended_mtx);
+			simulation->resources->simulation_ended = true;
+			pthread_mutex_unlock(&p->resources->sim_ended_mtx);
 			return (true);
 		}
 		pthread_mutex_unlock(&p->eating_start_mtx);
@@ -49,10 +49,10 @@ static bool is_execution_complete(t_simulation *simulation)
 		pthread_mutex_lock(&p->no_meals_mtx);
 		if (p->no_meals > simulation->resources->no_of_iterations)
 		{
-			pthread_mutex_lock(&p->resources->print_console_mtx);
-			simulation->resources->simulation_ended = true;
-			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			pthread_mutex_unlock(&p->no_meals_mtx);
+			pthread_mutex_lock(&p->resources->sim_ended_mtx);
+			simulation->resources->simulation_ended = true;
+			pthread_mutex_unlock(&p->resources->sim_ended_mtx);
 			return (true);
 		}
 		pthread_mutex_unlock(&p->no_meals_mtx);
