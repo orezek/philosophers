@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread
 SRCDIR = ./src
 OBJDIR = ./obj
 
@@ -14,7 +14,9 @@ SRCS = main.c \
        $(SRCDIR)/clean_allocs.c \
        $(SRCDIR)/init_simulation.c \
        $(SRCDIR)/init_philosophers.c \
-       $(SRCDIR)/forks.c
+       $(SRCDIR)/forks.c \
+       $(SRCDIR)/input_parser.c \
+       $(SRCDIR)/utils.c \
 
 # Adjust the object files path transformation
 OBJS = $(patsubst %.c, $(OBJDIR)/%.o, $(notdir $(SRCS)))

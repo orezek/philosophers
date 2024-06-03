@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 10:24:01 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 21:06:35 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,13 @@ void	*ft_sim_execution(void *philosopher);
 // Control thread for simulation status
 void *ft_simulation_control(void *simulation);
 
+// Input parsing
+int	args_error(void);
+int	zero_philo_error(void);
+int	check_args(int argc, char **argv);
+
 // Utils
 void	ft_print_state(t_philosopher *p, char *message);
+void	ft_putstr_fd(char *s, int fd);
+int		ft_int_atoi(const char *str);
+
