@@ -6,12 +6,11 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 09:06:07 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 10:43:01 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:44:04 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
-
 
 long int	ft_get_current_time(void)
 {
@@ -23,7 +22,7 @@ long int	ft_get_current_time(void)
 	return (time_in_ms);
 }
 
-long ft_get_sim_elapased_time(long sim_start_time)
+long	ft_get_sim_elapased_time(long sim_start_time)
 {
 	return (ft_get_current_time() - sim_start_time);
 }
@@ -36,7 +35,6 @@ void	ft_sleep(long period)
 	while ((ft_get_current_time() - init_time) < period)
 		usleep(10);
 }
-
 
 long	gettime(int time_code)
 {

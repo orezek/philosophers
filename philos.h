@@ -6,32 +6,32 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 22:44:21 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:48:53 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
-# include <pthread.h>
-# include <sys/time.h>
-# include <stdbool.h>
-# include <pthread.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <limits.h>
+#include <pthread.h>
+#include <sys/time.h>
+#include <stdbool.h>
+#include <pthread.h>
 
 #define IGNORE -1
 
-typedef struct s_philosopher t_philosopher;
-typedef struct s_shared_resources t_shared_resources;
-typedef struct s_simulation t_simulation;
+typedef struct s_philosopher		t_philosopher;
+typedef struct s_shared_resources	t_shared_resources;
+typedef struct s_simulation			t_simulation;
 
-typedef  enum
+typedef enum
 {
 	TAKEN = 0,
 	AVAILABLE = 1
 } Status;
 
-typedef  enum
+typedef enum
 {
 	LEFT_FORK = 0,
 	RIGHT_FORK = 1

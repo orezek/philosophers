@@ -6,13 +6,13 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 21:01:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 10:40:34 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:18:16 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
 
-void ft_clear_sim_memory(t_simulation *simulation)
+void	ft_clear_sim_memory(t_simulation *simulation)
 {
 	if (simulation->philosophers)
 	{

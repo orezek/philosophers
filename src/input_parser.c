@@ -6,11 +6,11 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:39:41 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 22:31:06 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:35:54 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../philos.h"
+#include "../philos.h"
 
 int	args_error(void)
 {
@@ -39,7 +39,8 @@ int	check_args(int argc, char **argv)
 			return (args_error());
 		if (ft_int_atoi(argv[1]) == 0)
 			return (zero_philo_error());
-		if (ft_int_atoi(argv[2]) < 0 || ft_int_atoi(argv[3]) < 0 || ft_int_atoi(argv[4]) < 0)
+		if (ft_int_atoi(argv[2]) < 0 || ft_int_atoi(argv[3]) < 0
+			|| ft_int_atoi(argv[4]) < 0)
 			return (args_error());
 	}
 	if (argc == 6)

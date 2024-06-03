@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:41:45 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:07:05 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:44:34 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-int ft_parse_input(t_simulation *s, int argc, char **argv)
+int	ft_parse_input(t_simulation *s, int argc, char **argv)
 {
 	if (argc > 1 && argc < 6)
 	{

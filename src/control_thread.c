@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 13:17:13 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:20:29 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static bool	is_time_to_die_exceeded(t_simulation *simulation)
 {
-	int i;
-	t_philosopher *p;
+	int				i;
+	t_philosopher	*p;
 
 	i = 0;
 	while (i < simulation->resources->n_of_philosophers)
@@ -37,10 +37,10 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 	return (false);
 }
 
-static bool is_execution_complete(t_simulation *simulation)
+static bool	is_execution_complete(t_simulation *simulation)
 {
-	int i;
-	t_philosopher *p;
+	int				i;
+	t_philosopher	*p;
 
 	i = 0;
 	while (i < simulation->resources->n_of_philosophers)
@@ -61,11 +61,9 @@ static bool is_execution_complete(t_simulation *simulation)
 	return (false);
 }
 
-
-
-void *ft_simulation_control(void *sim_void)
+void	*ft_simulation_control(void *sim_void)
 {
-	t_simulation *simulation;
+	t_simulation	*simulation;
 
 	simulation = (t_simulation *) sim_void;
 	while (1)

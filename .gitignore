@@ -4,3 +4,4 @@ main.dSYM/
 obj/*.o
 !obj/
 philo
+notes.txt

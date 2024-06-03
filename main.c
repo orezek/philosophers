@@ -6,13 +6,11 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:03:54 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:45:38 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
-
-// use static functions, static variables and function pointers
 
 bool	threads_to_run(t_simulation *sim)
 {
@@ -39,28 +37,6 @@ static void	ft_sync_threads(t_simulation *sim)
 	sim->resources->threads_ready = true;
 	pthread_mutex_unlock(&sim->resources->threads_ready_mtx);
 }
-
-
-// static int ft_parse_input(t_simulation *s, int argc, char **argv)
-// {
-// 	if (argc > 1 && argc < 6)
-// 	{
-// 		s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
-// 		s->resources->time_to_die = ft_int_atoi(argv[2]);
-// 		s->resources->time_to_eat = ft_int_atoi(argv[3]);
-// 		s->resources->time_sleep = ft_int_atoi(argv[4]);
-// 	}
-// 	if (argc == 6)
-// 	{
-// 		// s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
-// 		// s->resources->time_to_die = ft_int_atoi(argv[2]);
-// 		// s->resources->time_to_eat = ft_int_atoi(argv[3]);
-// 		// s->resources->time_sleep = ft_int_atoi(argv[4]);
-// 		s->resources->no_of_iterations = ft_int_atoi(argv[5]);
-// 	}
-// 	return (0);
-// }
-
 
 static int	dining_philosphers(int argc, char *argv[])
 {

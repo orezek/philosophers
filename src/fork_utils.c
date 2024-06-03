@@ -6,15 +6,16 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 12:48:30 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:21:41 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
 
-static void ft_print_fork_status(t_philosopher *p, Side fork)
+static void	ft_print_fork_status(t_philosopher *p, Side fork)
 {
-	long fork_time;
+	long	fork_time;
+
 	fork_time = ft_get_current_time() - p->resources->sim_start_time;
 	if (fork == RIGHT_FORK)
 		printf("%-10ld%-6dhas taken a fork\n", fork_time, p->id + 1);
@@ -22,7 +23,7 @@ static void ft_print_fork_status(t_philosopher *p, Side fork)
 		printf("%-10ld%-6dhas taken a fork\n", fork_time, p->id + 1);
 }
 
-inline static int get_right_fork_index(t_philosopher *p)
+inline static int	get_right_fork_index(t_philosopher *p)
 {
 	return ((p->id + 1) % p->resources->n_of_philosophers);
 }
@@ -71,12 +72,11 @@ int	ft_lock_right_fork(t_philosopher *p)
 			if (!p->resources->simulation_ended)
 				ft_print_fork_status(p, RIGHT_FORK);
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
-			return(0);
+			return (0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[right_fork_index]);
 		pthread_mutex_lock(&p->resources->print_console_mtx);
 	}
 	pthread_mutex_unlock(&p->resources->print_console_mtx);
-	return(0);
+	return (0);
 }
-
