@@ -6,47 +6,21 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 12:43:53 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 20:14:10 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philos.h"
+#include "philos.h"
 
 // use static functions, static variables and function pointers
 
-//cc main.c ./src/init_philosophers.c ./src/clean_allocs.c ./src/init_resources.c ./src/init_simulation.c ./src/time_functions.c ./src/thread_execution.c ./src/thread_states.c ./src/forks.c ./src/control_thread.c ./src/init_mutex.c ./src/fork_utils.c -Wall -Wextra -Werror -o philos && ./philos
-
-
-
-// states:
-
-// eat - the state has condition to have two mutexes locked for a period of time
-// sleep - state to keep the thread idle for certain period of time
-// think - state in between sleep and eat without time period
-
-// To do!!
-// void	destroy_mutexes(t_simulation *simulation)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < simulation->resources->n_of_philosophers)
-// 	{
-// 		//pthread_mutex_destroy(&dinner->shared->forks_mtxs[i]);
-// 		pthread_mutex_destroy(&simulation->philosophers[i].eating_start_time_mtx);
-// 		pthread_mutex_destroy(&dinner->philos[i].nof_meals_mtx);
-// 		i++;
-// 	}
-// 	pthread_mutex_destroy(&dinner->shared->printf_mtx);
-// }
-
-bool	threads_to_run(t_simulation *simulation)
+bool	threads_to_run(t_simulation *sim)
 {
-	static int no_of_philos;
+	static int	no_of_philos;
 
-	if (!simulation)
+	if (!sim)
 		return (false);
-	if (no_of_philos < simulation->resources->n_of_philosophers)
+	if (no_of_philos < sim->resources->n_of_philosophers)
 	{
 		no_of_philos++;
 		return (true);
@@ -58,32 +32,37 @@ bool	threads_to_run(t_simulation *simulation)
 	}
 }
 
+static void	ft_sync_threads(t_simulation *sim)
+{
+	pthread_mutex_lock(&sim->resources->threads_ready_mtx);
+	sim->resources->sim_start_time = ft_get_current_time();
+	sim->resources->threads_ready = true;
+	pthread_mutex_unlock(&sim->resources->threads_ready_mtx);
+}
+
 int	main(int argc, char *argv[])
 {
-	(void)argc;
-	t_simulation *simulation;
-	t_philosopher *philosopher;
-	int i;
+	t_simulation	*sim;
+	t_philosopher	*p;
+	int				i;
 
-	simulation = ft_malloc_simulation();
-	ft_init_simulation(simulation, argv);
+	(void)argc;
+	sim = ft_malloc_simulation();
+	ft_init_simulation(sim, argv);
 	i = 0;
-	while ((threads_to_run(simulation)))
+	while ((threads_to_run(sim)))
 	{
-		philosopher = &simulation->philosophers[i];
-		pthread_create(&philosopher->thread, NULL, &ft_sim_execution, philosopher);
+		p = &sim->philosophers[i];
+		pthread_create(&p->thread, NULL, &ft_sim_execution, p);
 		i++;
 	}
-	pthread_mutex_lock(&simulation->resources->threads_ready_mtx);
-	simulation->resources->sim_start_time = ft_get_current_time();
-	simulation->resources->threads_ready = true;
-	pthread_mutex_unlock(&simulation->resources->threads_ready_mtx);
-	pthread_create(&simulation->control_thread, NULL, &ft_simulation_control, simulation);
+	ft_sync_threads(sim);
+	pthread_create(&sim->control_thread, NULL, &ft_simulation_control, sim);
 	i = 0;
-	while (threads_to_run(simulation))
-		pthread_join(simulation->philosophers[i++].thread, NULL);
-	pthread_join(simulation->control_thread, NULL);
-	ft_clear_mutexes(simulation);
-	ft_clear_sim_memory(simulation);
+	while (threads_to_run(sim))
+		pthread_join(sim->philosophers[i++].thread, NULL);
+	pthread_join(sim->control_thread, NULL);
+	ft_clear_mutexes(sim);
+	ft_clear_sim_memory(sim);
 	return (0);
 }
