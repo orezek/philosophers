@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 22:05:19 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 10:24:01 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ struct s_shared_resources
 	long	time_to_eat;
 	long	time_sleep;
 	int		no_of_iterations;
+	bool threads_ready;
 	pthread_mutex_t	print_console_mtx;
-	pthread_mutex_t	sim_ended_mtx;
+	pthread_mutex_t	threads_ready_mtx;
 	pthread_mutex_t	*forks_mtxs;
 };
 

@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:51:10 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 00:38:13 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 10:23:28 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_init_mutexes(t_simulation *simulation)
 		i++;
 	}
 	pthread_mutex_init(&simulation->resources->print_console_mtx, NULL);
-	pthread_mutex_init(&simulation->resources->sim_ended_mtx, NULL);
+	pthread_mutex_init(&simulation->resources->threads_ready_mtx, NULL);
 }
 
 
@@ -42,5 +42,5 @@ void	ft_clear_mutexes(t_simulation *simulation)
 		i++;
 	}
 	pthread_mutex_destroy(&simulation->resources->print_console_mtx);
-	pthread_mutex_destroy(&simulation->resources->sim_ended_mtx);
+	pthread_mutex_destroy(&simulation->resources->threads_ready_mtx);
 }

@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 09:36:18 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 10:06:10 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	ft_print_state(t_philosopher *p, char *message)
 {
 	long	philosopher_eat_start;
 
-	//pthread_mutex_lock(&p->resources->print_console_mtx);
 	philosopher_eat_start = ft_get_sim_elapased_time(p->resources->sim_start_time);
 	printf("%-10ld%-6d%s\n", philosopher_eat_start, p->id + 1, message);
-	//pthread_mutex_unlock(&p->resources->print_console_mtx);
 }
 
 void	ft_eat_state(t_philosopher *p)
