@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 01:52:10 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 13:17:13 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static bool is_execution_complete(t_simulation *simulation)
 	{
 		p = &simulation->philosophers[i];
 		pthread_mutex_lock(&p->no_meals_mtx);
-		if (p->no_meals > simulation->resources->no_of_iterations)
+		if (p->no_meals > simulation->resources->no_of_iterations + 1)
 		{
 			pthread_mutex_unlock(&p->no_meals_mtx);
 			pthread_mutex_lock(&p->resources->print_console_mtx);
