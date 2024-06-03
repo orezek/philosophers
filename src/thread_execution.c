@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 12:18:30 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 12:22:02 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	*ft_sim_execution(void *phil_struct)
 {
 	t_philosopher *philosopher;
 	philosopher = (t_philosopher *) phil_struct;
+	
 	while (true)
 	{
 		usleep(5);
