@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 21:06:35 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 22:44:21 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,14 @@ struct s_simulation
 // Function signatures
 
 // Simulation init functions
-void ft_init_simulation(t_simulation *simulation, char *argv[]);
+void ft_init_simulation(t_simulation *simulation, int argc, char *argv[]);
 t_simulation *ft_malloc_simulation(void);
 
 // Philosphers init functions
 void	ft_init_philosophres(t_simulation *simulation);
 
 // Shared resources init functions
-void	ft_init_resources(t_simulation *simulation);
+void ft_init_resources(t_simulation *simulation, int argc, char **argv);
 
 // Mutex init functions
 void	ft_init_mutexes(t_simulation *simulation);

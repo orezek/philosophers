@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:39:41 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 22:08:10 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 22:31:06 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	zero_philo_error(void)
 
 int	check_args(int argc, char **argv)
 {
-	if (argc == 1)
-		return (0);
-	if (argc > 1 && argc < 5)
+	if (argc > 0 && argc < 5)
 		return (args_error());
 	if (argc == 5 || argc == 6)
 	{

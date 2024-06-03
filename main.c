@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 21:59:52 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:03:54 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,46 +41,37 @@ static void	ft_sync_threads(t_simulation *sim)
 }
 
 
-static int ft_parse_input(t_simulation *s, int argc, char **argv)
-{
-	if (check_args(argc, argv))
-	{
-		ft_clear_mutexes(s);
-		ft_clear_sim_memory(s);
-		return (1);
-	}
-	else
-	{
-		if (argc > 1 && argc < 6)
-		{
-			s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
-			s->resources->time_to_die = ft_int_atoi(argv[2]);
-			s->resources->time_to_eat = ft_int_atoi(argv[3]);
-			s->resources->time_sleep = ft_int_atoi(argv[4]);
-		}
-		if (argc == 6)
-		{
-			s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
-			s->resources->time_to_die = ft_int_atoi(argv[2]);
-			s->resources->time_to_eat = ft_int_atoi(argv[3]);
-			s->resources->time_sleep = ft_int_atoi(argv[4]);
-			s->resources->no_of_iterations = ft_int_atoi(argv[5]);
-		}
-		return (0);
-	}
+// static int ft_parse_input(t_simulation *s, int argc, char **argv)
+// {
+// 	if (argc > 1 && argc < 6)
+// 	{
+// 		s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
+// 		s->resources->time_to_die = ft_int_atoi(argv[2]);
+// 		s->resources->time_to_eat = ft_int_atoi(argv[3]);
+// 		s->resources->time_sleep = ft_int_atoi(argv[4]);
+// 	}
+// 	if (argc == 6)
+// 	{
+// 		// s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
+// 		// s->resources->time_to_die = ft_int_atoi(argv[2]);
+// 		// s->resources->time_to_eat = ft_int_atoi(argv[3]);
+// 		// s->resources->time_sleep = ft_int_atoi(argv[4]);
+// 		s->resources->no_of_iterations = ft_int_atoi(argv[5]);
+// 	}
+// 	return (0);
+// }
 
-}
 
 static int	dining_philosphers(int argc, char *argv[])
 {
 	t_simulation	*sim;
 	t_philosopher	*p;
 	int				i;
-	(void)argc;
-	sim = ft_malloc_simulation();
-	ft_init_simulation(sim, argv);
-	if (ft_parse_input(sim, argc, argv))
+
+	if (check_args(argc, argv))
 		return (1);
+	sim = ft_malloc_simulation();
+	ft_init_simulation(sim, argc, argv);
 	i = -1;
 	while ((threads_to_run(sim)))
 	{

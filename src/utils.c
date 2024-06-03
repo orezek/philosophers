@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 20:41:45 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 20:41:57 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:07:05 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,18 @@ void	ft_putstr_fd(char *s, int fd)
 	{
 		write(fd, s++, 1);
 	}
+}
+
+int ft_parse_input(t_simulation *s, int argc, char **argv)
+{
+	if (argc > 1 && argc < 6)
+	{
+		s->resources->n_of_philosophers = ft_int_atoi(argv[1]);
+		s->resources->time_to_die = ft_int_atoi(argv[2]);
+		s->resources->time_to_eat = ft_int_atoi(argv[3]);
+		s->resources->time_sleep = ft_int_atoi(argv[4]);
+	}
+	if (argc == 6)
+		s->resources->no_of_iterations = ft_int_atoi(argv[5]);
+	return (0);
 }

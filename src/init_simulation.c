@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 23:24:35 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/05/30 10:35:08 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 23:07:32 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ t_simulation *ft_malloc_simulation(void)
 	return (simulation);
 }
 
-void ft_init_simulation(t_simulation *simulation, char *argv[])
+void ft_init_simulation(t_simulation *simulation, int argc, char *argv[])
 {
-	(void)argv;
-	*simulation = (t_simulation){0}; // Initializes struct members to 0, NULL and 0.0
-	ft_init_resources(simulation);
+	*simulation = (t_simulation){0};
+	ft_init_resources(simulation, argc, argv);
 	ft_init_philosophres(simulation);
 	ft_init_mutexes(simulation);
 }
