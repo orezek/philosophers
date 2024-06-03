@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 12:05:43 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 12:43:53 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	pthread_mutex_lock(&simulation->resources->threads_ready_mtx);
+	simulation->resources->sim_start_time = ft_get_current_time();
 	simulation->resources->threads_ready = true;
 	pthread_mutex_unlock(&simulation->resources->threads_ready_mtx);
 	pthread_create(&simulation->control_thread, NULL, &ft_simulation_control, simulation);
