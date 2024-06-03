@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 23:50:33 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 01:34:38 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,29 @@ int	ft_lock_left_fork(t_philosopher *p)
 {
 	while (true)
 	{
-		pthread_mutex_lock(&p->resources->sim_ended_mtx);
+		pthread_mutex_lock(&p->resources->print_console_mtx);
 		if (p->resources->simulation_ended)
 		{
-			pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			return (0);
 		}
-		pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		pthread_mutex_lock(&p->resources->forks_mtxs[p->id]);
 		if (p->resources->forks[p->id] == AVAILABLE)
 		{
 			p->resources->forks[p->id] = TAKEN;
 			p->left_fork = HOLD;
 			pthread_mutex_unlock(&p->resources->forks_mtxs[p->id]);
-			pthread_mutex_lock(&p->resources->sim_ended_mtx);
-			if (p->resources->simulation_ended == false)
+			pthread_mutex_lock(&p->resources->print_console_mtx);
+			if (!p->resources->simulation_ended)
 			{
-				pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+				pthread_mutex_unlock(&p->resources->print_console_mtx);
 				ft_print_fork_status(p, LEFT_FORK);
 			}
 			else
-				pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+			{
+				pthread_mutex_unlock(&p->resources->print_console_mtx);
+			}
 			return (0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[p->id]);
@@ -69,27 +71,29 @@ int	ft_lock_right_fork(t_philosopher *p)
 
 	while (true)
 	{
-		pthread_mutex_lock(&p->resources->sim_ended_mtx);
+		pthread_mutex_lock(&p->resources->print_console_mtx);
 		if (p->resources->simulation_ended)
 		{
-			pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			return (0);
 		}
-		pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		pthread_mutex_lock(&p->resources->forks_mtxs[right_fork_index]);
 		if (p->resources->forks[right_fork_index] == AVAILABLE)
 		{
 			p->resources->forks[right_fork_index] = TAKEN;
 			p->right_fork = HOLD;
 			pthread_mutex_unlock(&p->resources->forks_mtxs[right_fork_index]);
-			pthread_mutex_lock(&p->resources->sim_ended_mtx);
-			if (p->resources->simulation_ended == false)
+			pthread_mutex_lock(&p->resources->print_console_mtx);
+			if (!p->resources->simulation_ended)
 			{
-				pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+				pthread_mutex_unlock(&p->resources->print_console_mtx);
 				ft_print_fork_status(p, RIGHT_FORK);
 			}
 			else
-				pthread_mutex_unlock(&p->resources->sim_ended_mtx);
+			{
+				pthread_mutex_unlock(&p->resources->print_console_mtx);
+			}
 			return(0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[right_fork_index]);

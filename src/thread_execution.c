@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/02 23:43:33 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 00:21:32 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int check_simulation_status(t_simulation *simulation)
 {
-	pthread_mutex_lock(&simulation->resources->sim_ended_mtx);
+	pthread_mutex_lock(&simulation->resources->print_console_mtx);
 	if (simulation->resources->simulation_ended)
 	{
-		pthread_mutex_unlock(&simulation->resources->sim_ended_mtx);
+		pthread_mutex_unlock(&simulation->resources->print_console_mtx);
 		return (false);
 	}
 	else
 	{
-		pthread_mutex_unlock(&simulation->resources->sim_ended_mtx);
+		pthread_mutex_unlock(&simulation->resources->print_console_mtx);
 		return (true);
 	}
 }
