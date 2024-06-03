@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 01:34:38 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/03 09:18:02 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,9 @@ inline static int get_right_fork_index(t_philosopher *p)
 
 int	ft_lock_left_fork(t_philosopher *p)
 {
-	while (true)
+	pthread_mutex_lock(&p->resources->print_console_mtx);
+	while (!p->resources->simulation_ended)
 	{
-		pthread_mutex_lock(&p->resources->print_console_mtx);
-		if (p->resources->simulation_ended)
-		{
-			pthread_mutex_unlock(&p->resources->print_console_mtx);
-			return (0);
-		}
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		pthread_mutex_lock(&p->resources->forks_mtxs[p->id]);
 		if (p->resources->forks[p->id] == AVAILABLE)
@@ -59,8 +54,10 @@ int	ft_lock_left_fork(t_philosopher *p)
 			return (0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[p->id]);
-		sched_yield();
+		pthread_mutex_lock(&p->resources->print_console_mtx);
 	}
+	pthread_mutex_unlock(&p->resources->print_console_mtx);
+	return (0);
 }
 
 int	ft_lock_right_fork(t_philosopher *p)
@@ -68,15 +65,9 @@ int	ft_lock_right_fork(t_philosopher *p)
 	int	right_fork_index;
 
 	right_fork_index = get_right_fork_index(p);
-
-	while (true)
+	pthread_mutex_lock(&p->resources->print_console_mtx);
+	while (!p->resources->simulation_ended)
 	{
-		pthread_mutex_lock(&p->resources->print_console_mtx);
-		if (p->resources->simulation_ended)
-		{
-			pthread_mutex_unlock(&p->resources->print_console_mtx);
-			return (0);
-		}
 		pthread_mutex_unlock(&p->resources->print_console_mtx);
 		pthread_mutex_lock(&p->resources->forks_mtxs[right_fork_index]);
 		if (p->resources->forks[right_fork_index] == AVAILABLE)
@@ -97,7 +88,9 @@ int	ft_lock_right_fork(t_philosopher *p)
 			return(0);
 		}
 		pthread_mutex_unlock(&p->resources->forks_mtxs[right_fork_index]);
-		sched_yield();
+		pthread_mutex_lock(&p->resources->print_console_mtx);
 	}
+	pthread_mutex_unlock(&p->resources->print_console_mtx);
+	return(0);
 }
 
