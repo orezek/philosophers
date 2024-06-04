@@ -6,11 +6,39 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:12:18 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:45:38 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/04 14:16:17 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philos.h"
+
+/*
+############Testing#################
+General note:
+Inrease the argument "time_to_die" generously as the
+profilers decrease the speed of the thread execution.
+For monitoring data races, deadlocks or memeory leaks
+you do not need to check thread sychornization
+(time_to_die) after all!
+
+Data races and deadlock checks
+1) compile with flag -fsanitize=thread and run
+or
+2) remove the flag from above and run
+valgrind --tool=helgrind --fair-sched=yes
+./philo 5 50000 200 200 10
+valgrind --tool=helgrind --fair-sched=yes
+--history-level=approx ./philo 5 50000 200 200 10
+valgrind --tool=helgrind --fair-sched=yes
+--history-level=none ./philo 5 50000 200 200 10
+or
+3) run
+valgrind --tool=drd --fair-sched=yes ./philo 5 50000 200 200 10
+
+Memory leaks cheks
+valgrind ./philo 5 50000 200 200 10
+
+*/
 
 bool	threads_to_run(t_simulation *sim)
 {
