@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:42:39 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/04 19:43:38 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ void	*ft_sim_execution(void *phil_struct)
 		ft_sleep_state(philosopher);
 		ft_think_state(philosopher);
 	}
-	ft_print_eaten_meals(philosopher);
 	return (NULL);
 }
