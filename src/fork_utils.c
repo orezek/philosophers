@@ -6,13 +6,13 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 11:45:57 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:21:41 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/04 12:52:36 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
 
-static void	ft_print_fork_status(t_philosopher *p, Side fork)
+static void	ft_print_fork_status(t_philosopher *p, t_side fork)
 {
 	long	fork_time;
 
