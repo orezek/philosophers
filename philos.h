@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 22:13:16 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:48:53 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/04 12:43:00 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,58 +25,58 @@ typedef struct s_philosopher		t_philosopher;
 typedef struct s_shared_resources	t_shared_resources;
 typedef struct s_simulation			t_simulation;
 
-typedef enum
+typedef enum t_status
 {
 	TAKEN = 0,
 	AVAILABLE = 1
-} Status;
+}	t_status;
 
-typedef enum
+typedef enum t_side
 {
 	LEFT_FORK = 0,
 	RIGHT_FORK = 1
-} Side;
+}	t_side;
 
-typedef  enum
+typedef enum t_state
 {
 	RELEASE = 0,
 	HOLD = 1
-} State;
+}	t_state;
 
-typedef enum
+typedef enum t_time_code
 {
 	MILLISECOND,
 	MICROSECOND,
 	SECONDS
-} Time_code;
+}	t_time_code;
 
 // thread struct aka philosopher
 struct s_philosopher
 {
-	int id;
-	bool left_fork;
-	bool right_fork;
-	int no_meals;
-	long eating_start;
-	pthread_mutex_t	no_meals_mtx;
-	pthread_mutex_t	eating_start_mtx;
-	pthread_t thread;
-	t_shared_resources *resources;
-	t_simulation *simulation;
+	int					id;
+	bool				left_fork;
+	bool				right_fork;
+	int					no_meals;
+	long				eating_start;
+	pthread_mutex_t		no_meals_mtx;
+	pthread_mutex_t		eating_start_mtx;
+	pthread_t			thread;
+	t_shared_resources	*resources;
+	t_simulation		*simulation;
 };
 
 // resource struct to hold shared resources for the simulation
 struct s_shared_resources
 {
-	int		*forks;
-	bool	simulation_ended;
-	long	sim_start_time;
-	int		n_of_philosophers;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_sleep;
-	int		no_of_iterations;
-	bool threads_ready;
+	int				*forks;
+	bool			simulation_ended;
+	long			sim_start_time;
+	int				n_of_philosophers;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_sleep;
+	int				no_of_iterations;
+	bool			threads_ready;
 	pthread_mutex_t	print_console_mtx;
 	pthread_mutex_t	threads_ready_mtx;
 	pthread_mutex_t	*forks_mtxs;
@@ -85,67 +85,66 @@ struct s_shared_resources
 // main simulation struct
 struct s_simulation
 {
-	pthread_t control_thread;
-	t_philosopher *philosophers;
-	t_shared_resources *resources;
+	pthread_t			control_thread;
+	t_philosopher		*philosophers;
+	t_shared_resources	*resources;
 };
-
-
 
 // Function signatures
 
 // Simulation init functions
-void ft_init_simulation(t_simulation *simulation, int argc, char *argv[]);
-t_simulation *ft_malloc_simulation(void);
+void			ft_init_simulation(
+					t_simulation *simulation, int argc, char *argv[]);
+t_simulation	*ft_malloc_simulation(void);
 
 // Philosphers init functions
-void	ft_init_philosophres(t_simulation *simulation);
+void			ft_init_philosophres(t_simulation *simulation);
 
 // Shared resources init functions
-void ft_init_resources(t_simulation *simulation, int argc, char **argv);
+void			ft_init_resources(
+					t_simulation *simulation, int argc, char **argv);
 
 // Mutex init functions
-void	ft_init_mutexes(t_simulation *simulation);
+void			ft_init_mutexes(t_simulation *simulation);
 
 // Cleaning functions
-void	ft_clear_sim_memory(t_simulation *simulation);
-void	ft_clear_mutexes(t_simulation *simulation);
+void			ft_clear_sim_memory(t_simulation *simulation);
+void			ft_clear_mutexes(t_simulation *simulation);
 
 // Utility functions
 
 // Time handling functions
-long int	ft_get_current_time(void);
-long		ft_get_sim_elapased_time(long sim_start_time);
-void		ft_sleep(long period);
-void		ft_precise_sleep(long period, t_philosopher *p);
-long	gettime(int time_code);
+long int		ft_get_current_time(void);
+long			ft_get_sim_elapased_time(long sim_start_time);
+void			ft_sleep(long period);
+void			ft_precise_sleep(long period, t_philosopher *p);
+long			gettime(int time_code);
 
 // Fork handling functions
-void	ft_lock_forks(t_philosopher *philosopher);
-void	ft_release_forks(t_philosopher *philosopher);
+void			ft_lock_forks(t_philosopher *philosopher);
+void			ft_release_forks(t_philosopher *philosopher);
 
 // Fork utils
-int	ft_lock_left_fork(t_philosopher *p);
-int	ft_lock_right_fork(t_philosopher *p);
+int				ft_lock_left_fork(t_philosopher *p);
+int				ft_lock_right_fork(t_philosopher *p);
 
 // For handling philosopher states
-void ft_eat_state(t_philosopher *philosopher);
-void ft_sleep_state(t_philosopher *philosopher);
-void ft_think_state(t_philosopher *philosopher);
+void			ft_eat_state(t_philosopher *philosopher);
+void			ft_sleep_state(t_philosopher *philosopher);
+void			ft_think_state(t_philosopher *philosopher);
 
 // Thread execution functions
-void	*ft_sim_execution(void *philosopher);
+void			*ft_sim_execution(void *philosopher);
 
 // Control thread for simulation status
-void *ft_simulation_control(void *simulation);
+void			*ft_simulation_control(void *simulation);
 
 // Input parsing
-int	args_error(void);
-int	zero_philo_error(void);
-int	check_args(int argc, char **argv);
+int				args_error(void);
+int				zero_philo_error(void);
+int				check_args(int argc, char **argv);
 
 // Utils
-void	ft_print_state(t_philosopher *p, char *message);
-void	ft_putstr_fd(char *s, int fd);
-int		ft_int_atoi(const char *str);
-
+void			ft_print_state(t_philosopher *p, char *message);
+void			ft_putstr_fd(char *s, int fd);
+int				ft_int_atoi(const char *str);
