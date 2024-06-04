@@ -6,13 +6,13 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/04 19:43:38 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/04 19:53:20 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
 
-static void	ft_print_eaten_meals(t_philosopher *philosopher)
+void	ft_print_eaten_meals(t_philosopher *philosopher)
 {
 	pthread_mutex_lock(&philosopher->resources->print_console_mtx);
 	printf("P: id: %d, No_of_meals: %d\n",
