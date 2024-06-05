@@ -6,7 +6,7 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/05 17:20:19 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/05 17:28:13 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_print_state_control_thread(t_philosopher *p, char *message)
 
 	philosopher_eat_start = ft_get_sim_elapased_time
 		(p->resources->sim_start_time);
-	printf("%-10ld%-6d%s\n", philosopher_eat_start - 1, p->id + 1, message);
+	printf("%-10ld%-6d%s\n", philosopher_eat_start, p->id + 1, message);
 }
 
 static bool	is_time_to_die_exceeded(t_simulation *simulation)
