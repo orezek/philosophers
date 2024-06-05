@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_states.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
+/*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:43:15 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:43:04 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/05 13:41:00 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_eat_state(t_philosopher *p)
 		pthread_mutex_lock(&p->eating_start_mtx);
 		p->eating_start = ft_get_current_time();
 		pthread_mutex_unlock(&p->eating_start_mtx);
-		ft_sleep(p->resources->time_sleep);
+		ft_sleep(p->resources->time_to_eat);
 		pthread_mutex_lock(&p->no_meals_mtx);
 		p->no_meals++;
 		pthread_mutex_unlock(&p->no_meals_mtx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_simulation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
+/*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 23:24:35 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:34:48 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/05 14:07:09 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_simulation	*ft_malloc_simulation(void)
 
 	simulation = malloc(sizeof(t_simulation));
 	if (!simulation)
-		exit(1);
+		return (NULL);
 	return (simulation);
 }
 

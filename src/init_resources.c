@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_resources.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
+/*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 21:58:59 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:34:00 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/05 14:07:39 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_init_resources(t_simulation *sim, int argc, char **argv)
 
 	resources = malloc(sizeof(t_shared_resources));
 	if (!resources)
-		exit(1);
+		return ;
 	*resources = (t_shared_resources){0};
 	sim->resources = resources;
 	resources->n_of_philosophers = ft_int_atoi(argv[1]);
