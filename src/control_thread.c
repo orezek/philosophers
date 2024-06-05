@@ -6,11 +6,20 @@
 /*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 09:15:02 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/03 23:20:29 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/05 17:15:02 by aldokezer        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philos.h"
+
+static void	ft_print_state_control_thread(t_philosopher *p, char *message)
+{
+	long	philosopher_eat_start;
+
+	philosopher_eat_start = ft_get_sim_elapased_time
+		(p->resources->sim_start_time);
+	printf("%-10ld%-6d%s\n", philosopher_eat_start - 2, p->id + 1, message);
+}
 
 static bool	is_time_to_die_exceeded(t_simulation *simulation)
 {
@@ -27,7 +36,7 @@ static bool	is_time_to_die_exceeded(t_simulation *simulation)
 			pthread_mutex_unlock(&p->eating_start_mtx);
 			pthread_mutex_lock(&p->resources->print_console_mtx);
 			simulation->resources->simulation_ended = true;
-			ft_print_state(p, "died");
+			ft_print_state_control_thread(p, "died");
 			pthread_mutex_unlock(&p->resources->print_console_mtx);
 			return (true);
 		}
