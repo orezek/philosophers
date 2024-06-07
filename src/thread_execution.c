@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_execution.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aldokezer <aldokezer@student.42.fr>        +#+  +:+       +#+        */
+/*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:05:29 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/06/05 20:37:16 by aldokezer        ###   ########.fr       */
+/*   Updated: 2024/06/07 16:29:28 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ void	*ft_sim_execution(void *phil_struct)
 		ft_sleep_state(philosopher);
 		ft_think_state(philosopher);
 	}
-	ft_print_eaten_meals(philosopher);
 	return (NULL);
 }
